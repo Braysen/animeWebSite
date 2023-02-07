@@ -1,0 +1,8 @@
+.navbar-collapse{
+    flex-grow: initial;
+}
+@media screen and (max-width: 769px){
+    .navbar-content{
+        width: 90%!important;
+    }
+}
