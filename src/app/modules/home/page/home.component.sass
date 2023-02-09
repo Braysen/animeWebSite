@@ -1,9 +1,15 @@
 @use '../../../../assets/styles/colors/_colors' as color
 .bg-black
     background-color: color.$col-black!important
+.title-section
+    color: color.$col-pink-stick!important
+    font-size: 18px
 @media only screen and (min-width: 992px)
     .banner
         height: 500px!important
 @media only screen and (max-width: 992px)
     .container-home-info
         width: 100%!important
+@media only screen and (max-width: 361px)
+    .title-section
+        font-size: 14px
