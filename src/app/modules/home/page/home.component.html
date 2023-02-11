@@ -4,8 +4,8 @@
             <img src="../../../../assets/img/banner.jpg" class="h-100 w-100">
         </div>
         <div class="w-75 m-auto d-flex mt-lg-5 mt-md-5 mt-sm-5 mt-3 mb-5 flex-lg-row flex-md-column-reverse flex-sm-column-reverse flex-column-reverse">
-            <div class="col-7 container-home-info bg-black mt-lg-0 mt-md-5 mt-sm-5 mt-4">
-                <p class="title-section">Recomendados</p>
+            <div class="bg-black col-7 container-home-info bg-primary mt-lg-0 mt-md-5 mt-sm-5 mt-4">
+                <p class="title-section">Recommended</p>
                 <ngx-slick-carousel class="carousel"
                     #slickModal="slick-carousel"
                     [config]="slideConfig">
@@ -17,8 +17,23 @@
                 </ngx-slick-carousel>
             </div>
             <div class="col-1"></div>
-            <div class="col-4 container-home-info">
-                <app-genres-menu></app-genres-menu>
+            <div class="container-home-info d-lg-flex col-lg-4 flex-lg-column d-md-flex flex-md-row d-sm-flex d-column justify-content-between">
+                <div class="bg-black col-lg-12 col-md-5 col-sm-5">
+                    <p class="title-section">Genders</p>
+                    <app-genres-menu [amountOfDataToDisplay]="amountOfGenreListData"></app-genres-menu>
+                </div>
+                
+                <div class="bg-black container-top-10 mt-lg-5 col-lg-12 mt-md-0 col-md-5 mt-sm-0 col-sm-5 mt-4">
+                    <p class="title-section">Top 10</p>
+                    <div *ngIf="topAnimeList">
+                        <ul class="list-group menu-genres-container mb-lg-0 mb-md-0" *ngFor="let item of topAnimeList">
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-lg-row-reverse bg-black">
+                                <a href="#" class="text-decoration-none">{{item.title_english}}</a>
+                                <span class="badge text-white">{{item.episodes}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

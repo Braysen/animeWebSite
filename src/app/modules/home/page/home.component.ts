@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { TopAnime } from 'src/app/core/interfaces/anime.interface';
+
+import { HomeService } from 'src/app/core/services/home/home.service';
+import { reduceList } from 'src/app/shared/helpers/shared.helper';
 
 @Component({
   selector: 'app-home',
@@ -6,6 +10,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.sass']
 })
 export class HomeComponent implements OnInit{
+  public topAnimeList: TopAnime[] = [];
+  public amountOfGenreListData = 10;
   slideConfig = {
     "slidesToShow": 3,
     "slidesToScroll": 1,
@@ -37,8 +43,20 @@ export class HomeComponent implements OnInit{
     "https://derf9v1xhwwx1.cloudfront.net/image/upload/c_fill,q_80,w_265,h_397/oth/FunimationStoreFront/1498648/Latvian/1498648_Latvian_ShowKeyart_b10b93cb-f1e3-ea11-82a8-dd291e252010.jpg"
   ]
 
-  constructor(){}
+  constructor(private homeService: HomeService){}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.showAnimeTop();
+  }
+
+  async showAnimeTop(): Promise<void>{
+    (await (this.homeService.getAnimeTop())).subscribe({
+      next: (data) => {
+        this.topAnimeList = reduceList(data.data, 10);
+      },
+      error: (error) => {
+        return error;
+      }
+    })
   }
 }
